@@ -1,0 +1,26 @@
+schema:
+    - ${NEXT_PUBLIC_COMMERCE_GRAPHQL_ENDPOINT}:
+          headers:
+            Authorization: Bearer ${CENTRA_API_WRITE_TOKEN}
+documents: src/**/*.graphql
+overwrite: true
+verbose: true
+generates:
+    ${CODEGEN_ROOT_FOLDER_PATH}/commerce/index.ts:
+        hooks:
+            afterAllFileWrite:
+                - prettier --write
+                - eslint --fix
+        plugins:
+            - typescript
+            - typescript-operations
+            - typescript-graphql-request
+        config:
+            gqlImport: graphql-request#gql
+            dedupeFragments: true
+    schema.graphql:
+        plugins:
+            - schema-ast
+        config:
+            includeDirectives: true
+            includeIntrospectionTypes: true

@@ -1,0 +1,111 @@
+{
+  "name": "centra-commerce-strapi-starterkit",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "start": "next start",
+    "codegen:commerce-checkout": "dotenv -- cross-var openapi-generator-cli generate -i %CENTRA_CHECKOUT_SWAGGER_ENDPOINT% -g typescript -o %CODEGEN_ROOT_FOLDER_PATH%/commerce/checkout --global-property models --additional-properties=supportsES6=true,npmVersion=9.2.0 -a API-Authorization:%CENTRA_CHECKOUT_API_SHARED_SECRET% --skip-validate-spec && npm run codegen:commerce-checkout-replace-backwards-slash && npm run codegen:lint-fix",
+    "codegen:commerce-graphql": "graphql-codegen -r dotenv/config --config ./graphql-codegen.config.yml && npm run codegen:lint-fix",
+    "codegen:lint-fix": "cross-var eslint \"src/infrastructure/types/generated/**/*.ts\" --fix --no-ignore && cross-var prettier --write \"src/infrastructure/types/generated/**/*.{ts,md}\"",
+    "codegen:clean-commerce": "rimraf cross-var %CODEGEN_ROOT_FOLDER_PATH%/commerce* -Recurse",
+    "type-check": "tsc --project tsconfig.json --pretty --noEmit",
+    "lint": "eslint \"src/**/*.{ts,tsx,js,jsx,mjs,cjs,json,graphql}\" --fix",
+    "prettier": "prettier --write \"src/**/*.{css,scss,sass,ts,tsx,js,jsx,md,json,graphql,mjs,cjs}\"",
+    "analyze": "cross-env ANALYZE=true next build",
+    "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
+    "postinstall": "node node_modules/husky/lib/installer/bin install"
+  },
+  "dependencies": {
+    "@radix-ui/react-icons": "1.1.1",
+    "@radix-ui/react-popover": "1.0.3",
+    "@radix-ui/react-scroll-area": "1.0.2",
+    "@radix-ui/react-select": "1.2.0",
+    "@tanstack/react-query": "4.24.4",
+    "@trpc/client": "10.10.0",
+    "@trpc/next": "10.10.0",
+    "@trpc/react-query": "10.10.0",
+    "@trpc/server": "10.10.0",
+    "@vanilla-extract/css": "1.9.5",
+    "@vanilla-extract/css-utils": "0.1.3",
+    "@vanilla-extract/recipes": "0.3.0",
+    "@vanilla-extract/sprinkles": "1.5.1",
+    "classnames": "2.3.2",
+    "cookies-next": "2.1.1",
+    "framer-motion": "9.0.2",
+    "graphql": "16.6.0",
+    "next": "13.1.6",
+    "next-auth": "4.18.7",
+    "nextjs-progressbar": "0.0.16",
+    "polished": "4.2.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "7.43.1",
+    "recoil": "0.7.6",
+    "server-only": "0.0.1",
+    "superjson": "1.12.2",
+    "zod": "3.20.5"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.16.4",
+    "@graphql-codegen/schema-ast": "^2.6.1",
+    "@graphql-codegen/typescript": "2.8.7",
+    "@graphql-codegen/typescript-graphql-request": "4.5.8",
+    "@graphql-codegen/typescript-operations": "2.5.12",
+    "@graphql-eslint/eslint-plugin": "^3.14.3",
+    "@next/bundle-analyzer": "13.1.1",
+    "@openapitools/openapi-generator-cli": "2.5.2",
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
+    "@typescript-eslint/eslint-plugin": "5.47.1",
+    "@typescript-eslint/parser": "5.47.1",
+    "@vanilla-extract/next-plugin": "2.1.1",
+    "cross-env": "7.0.3",
+    "cross-var": "1.1.0",
+    "dotenv": "16.0.3",
+    "dotenv-cli": "6.0.0",
+    "eslint": "8.30.0",
+    "eslint-config-next": "13.1.1",
+    "eslint-config-prettier": "8.6.0",
+    "eslint-plugin-jsx-a11y": "6.7.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-react": "7.31.11",
+    "eslint-plugin-unused-imports": "2.0.0",
+    "fs": "0.0.1-security",
+    "husky": "4.3.8",
+    "intercept-stdout": "0.1.2",
+    "lint-staged": "12.3.7",
+    "module": "1.2.5",
+    "npm-run-all": "4.1.5",
+    "path": "0.12.7",
+    "prettier": "2.8.2",
+    "rimraf": "3.0.2",
+    "typescript": "4.9.5"
+  },
+  "engines": {
+    "node": "18.14.0",
+    "npm": "9.4.2"
+  },
+  "packageManager": "npm@9.4.2",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run type-check && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "./src/**/*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --cache --fix"
+    ],
+    "./src/**/*.{md,json}": [
+      "prettier --write"
+    ]
+  },
+  "volta": {
+    "node": "18.14.0",
+    "npm": "9.4.2"
+  }
+}
