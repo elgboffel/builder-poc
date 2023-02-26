@@ -17,10 +17,6 @@ export const serverSchema = z.object({
   ),
   DISCORD_CLIENT_ID: z.string(),
   DISCORD_CLIENT_SECRET: z.string(),
-  CENTRA_API_READ_TOKEN: z.string(),
-  CENTRA_API_WRITE_TOKEN: z.string(),
-  CENTRA_CHECKOUT_API_SHARED_SECRET: z.string(),
-  CENTRA_CHECKOUT_API_ENDPOINT: z.string(),
 });
 
 /**
@@ -34,10 +30,6 @@ export const serverEnv = {
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
   DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
-  CENTRA_API_READ_TOKEN: process.env.CENTRA_API_READ_TOKEN,
-  CENTRA_API_WRITE_TOKEN: process.env.CENTRA_API_WRITE_TOKEN,
-  CENTRA_CHECKOUT_API_SHARED_SECRET: process.env.CENTRA_CHECKOUT_API_SHARED_SECRET,
-  CENTRA_CHECKOUT_API_ENDPOINT: process.env.CENTRA_CHECKOUT_API_ENDPOINT,
 };
 
 /**
@@ -46,8 +38,6 @@ export const serverEnv = {
  * To expose them to the client, prefix them with `NEXT_PUBLIC_`.
  */
 export const clientSchema = z.object({
-  NEXT_PUBLIC_CENTRA_API_READ_TOKEN: z.string(),
-  NEXT_PUBLIC_COMMERCE_GRAPHQL_ENDPOINT: z.string(),
 });
 
 /**
@@ -57,6 +47,4 @@ export const clientSchema = z.object({
  * @type {{ [k in keyof z.infer<typeof clientSchema>]: z.infer<typeof clientSchema>[k] | undefined }}
  */
 export const clientEnv = {
-  NEXT_PUBLIC_CENTRA_API_READ_TOKEN: process.env.NEXT_PUBLIC_CENTRA_API_READ_TOKEN,
-  NEXT_PUBLIC_COMMERCE_GRAPHQL_ENDPOINT: process.env.NEXT_PUBLIC_COMMERCE_GRAPHQL_ENDPOINT,
 };

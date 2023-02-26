@@ -6,7 +6,7 @@ export class AppError extends Error {
   constructor(error: Error) {
     super();
 
-    this.error = error.;
+    this.error = error as BaseError;
   }
 
   serialize = (): BaseError => {

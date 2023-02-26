@@ -1,6 +1,7 @@
 import React from "react";
 import NextDocument, { Html, Head, Main, NextScript } from "next/document";
 import { theme } from "@styles/theme.css";
+
 class Document extends NextDocument {
   render() {
     return (

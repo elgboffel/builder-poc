@@ -5,6 +5,9 @@ import { NextPageWithLayout, Page, PageContextBase } from "@infrastructure/types
 import { SessionProvider } from "next-auth/react";
 import { vars } from "@styles/config/contract.css";
 import NextNProgress from "nextjs-progressbar";
+import { builder } from "@builder.io/sdk";
+
+builder.init("ffb2ed83b4ea4cbaa059204ca3693d3a" || "");
 
 type AppPropsWithLayout = AppProps<Page<unknown, PageContextBase, unknown>> & {
   Component: NextPageWithLayout;
