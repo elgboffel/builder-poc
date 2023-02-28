@@ -2,14 +2,15 @@
 import { sprinkles } from "@styles/sprinkles.css";
 import { vars } from "@styles/config/contract.css";
 import { style } from "@vanilla-extract/css";
+const { color, size } = vars;
 
 export const root = recipe({
   base: [
     {
-      width: vars.sizes["7"],
-      height: vars.sizes["7"],
+      width: size["7"],
+      height: size["7"],
       borderRadius: "50%",
-      border: `1px solid ${vars.colors.harbour}`,
+      border: `1px solid ${color.secondary}`,
       right: vars.space["3"],
       top: "50%",
       transform: "translateY(-50%)",
@@ -24,12 +25,12 @@ export const root = recipe({
   variants: {
     error: {
       true: {
-        background: vars.colors.jadedGinger,
+        background: color.error,
       },
     },
     valid: {
       true: {
-        background: vars.colors.greenbrier,
+        background: color.secondary,
       },
     },
   },

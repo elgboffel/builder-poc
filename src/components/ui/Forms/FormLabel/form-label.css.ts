@@ -1,7 +1,9 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "@styles/config/contract.css";
 
+const { space } = vars;
+
 export const root = style({
-  top: vars.space["5"],
-  left: vars.space["6"],
+  top: space["5"],
+  left: space["6"],
 });

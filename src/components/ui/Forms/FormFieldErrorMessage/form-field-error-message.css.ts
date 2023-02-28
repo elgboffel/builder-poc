@@ -1,17 +1,18 @@
 import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
 import { sprinkles } from "@styles/sprinkles.css";
 import { vars } from "@styles/config/contract.css";
+const { color } = vars;
 
 export const root = recipe({
   base: [sprinkles({ width: "full" })],
   variants: {
     type: {
       basic: {
-        color: vars.colors.jadedGinger,
+        color: color.error,
         fontWeight: "normal",
       },
       default: sprinkles({
-        bg: "jadedGinger",
+        bg: "error",
         px: 3,
         py: 5,
         color: "white",

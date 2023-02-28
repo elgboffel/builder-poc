@@ -2,9 +2,8 @@ import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
 import { vars } from "@styles/config/contract.css";
 import { sprinkles } from "@styles/sprinkles.css";
 
-const {
-  colors: { harbour, jadedGinger, white },
-} = vars;
+const { color, fontWeight } = vars;
+
 export const root = recipe({
   base: {
     transition: "color 175ms",
@@ -12,13 +11,13 @@ export const root = recipe({
   variants: {
     color: {
       primary: {
-        color: harbour,
+        color: color.primary,
       },
       secondary: {
-        color: jadedGinger,
+        color: color.secondary,
       },
       white: {
-        color: white,
+        color: color.white,
       },
     },
     size: {
@@ -39,10 +38,10 @@ export const root = recipe({
     },
     weight: {
       light: {
-        fontWeight: vars.fontWeights.light,
+        fontWeight: fontWeight.light,
       },
       bold: {
-        fontWeight: vars.fontWeights.bold,
+        fontWeight: fontWeight.bold,
       },
     },
     caps: {

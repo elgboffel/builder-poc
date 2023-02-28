@@ -3,8 +3,9 @@ import DefaultErrorPage from "next/error";
 import Head from "next/head";
 import React from "react";
 import { BuilderComponent, builder, useIsPreviewing, Builder } from "@builder.io/react";
+import { GetStaticPathsContext, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 
-export async function getStaticProps({ params }: any) {
+export async function getStaticProps({ params }: GetStaticPropsContext<{ page: string[] }>) {
   // Fetch the first page from Builder that matches the current URL.
   // Use the `userAttributes` field for targeting content.
   // For more, see https://www.builder.io/c/docs/targeting-with-builder
@@ -24,7 +25,7 @@ export async function getStaticProps({ params }: any) {
   };
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   //  Fetch all published pages for the current model.
   //  Using the `fields` option will limit the size of the response
   //  and only return the `data.url` field from the matching pages.
@@ -40,7 +41,7 @@ export async function getStaticPaths() {
   };
 }
 
-export default function Page({ page }: any) {
+export default function Page({ page }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
   //  This flag indicates if you are viewing the page in the Builder editor.
   const isPreviewing = useIsPreviewing();

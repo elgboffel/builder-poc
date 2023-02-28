@@ -1,34 +1,28 @@
 import { rem } from "polished";
 import { BREAKPOINTS, PX_BASE } from "@styles/config/constants";
 
-export const fontSizes = {
-  tiny: rem("10px", PX_BASE),
-  xs: rem("12px", PX_BASE),
-  sm: rem("14px", PX_BASE),
-  md: rem(PX_BASE, PX_BASE),
-  lg: rem("20px", PX_BASE),
-  xl: rem("24px", PX_BASE),
-  xxl: rem("28px", PX_BASE),
-  jumbo: rem("32px", PX_BASE),
-
-  text: rem(PX_BASE, PX_BASE),
-};
-
-export const fontWeights = {
+export const fontWeight = {
   light: "300",
   normal: "400",
   bold: "700",
 };
 
-export const letterSpacings = {
-  normal: "0em",
-  text: "normal",
-  heading: "normal",
+export const letterSpacing = {
+  sm: "0.025em",
+  md: "0.05em",
+  lg: "0.1em",
+
+  text: "0.05em",
+  heading: "0.1em",
 };
 
-export const lineHeights = {
+export const lineHeight = {
+  sm: "0.8em",
+  md: "1em",
+  lg: "1.2em",
+
   text: "1em",
-  heading: "1.1em",
+  heading: "1.2em",
 };
 
 export const space = {
@@ -75,7 +69,7 @@ export const space = {
   auto: "auto",
 };
 
-export const sizes = {
+export const size = {
   0: rem("0px", PX_BASE),
   1: rem("4px", PX_BASE),
   2: rem("8px", PX_BASE),
@@ -110,8 +104,7 @@ export const sizes = {
 
   smallContainer: `${BREAKPOINTS.bp1}`,
   mediumContainer: `${BREAKPOINTS.bp2}`,
-  container: `${BREAKPOINTS.bp3}`,
-  largeContainer: `1920px`,
+  largeContainer: `${BREAKPOINTS.bp3}`,
   fluid: `2560px`,
 
   full: "100%",
@@ -147,11 +140,11 @@ export const zIndices = {
   max: "999",
 };
 
-export const borderWidths = {
+export const borderWidth = {
   none: "0",
   sm: "1px",
-  m: "2px",
-  l: "3px",
+  md: "2px",
+  lg: "3px",
 };
 
 export const borderRadius = {
@@ -168,22 +161,22 @@ export const borderRadius = {
   10: "10",
 };
 
-export const shadows = {
+export const shadow = {
+  sm: "rgb(14 18 22 / 35%) 0px 10px 6px -12px, rgb(14 18 22 / 20%) 0px 10px 20px -15px",
   md: "rgb(14 18 22 / 35%) 0px 10px 11px -17px, rgb(14 18 22 / 20%) 0px 10px 20px -15px",
   lg: "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
 };
 
 export const commonVars = {
-  fontSizes,
-  fontWeights,
-  letterSpacings,
-  lineHeights,
+  fontWeight,
+  letterSpacing,
+  lineHeight,
   space,
-  sizes,
+  size,
   radii,
   zIndices,
-  borderWidths,
-  borderStyles: {},
+  borderWidth,
+  borderStyle: {},
   borderRadius,
-  shadows,
+  shadow,
 };

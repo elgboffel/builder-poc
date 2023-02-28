@@ -13,9 +13,7 @@ type AppPropsWithLayout = AppProps<Page<unknown, PageContextBase, unknown>> & {
   Component: NextPageWithLayout;
 };
 
-const {
-  colors: { jadedGinger },
-} = vars;
+const { color } = vars;
 
 const Site = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
@@ -24,7 +22,7 @@ const Site = ({ Component, pageProps }: AppPropsWithLayout) => {
     <SessionProvider session={pageProps.session}>
       <RecoilRoot>
         <NextNProgress
-          color={jadedGinger}
+          color={color.primary}
           startPosition={0.3}
           stopDelayMs={200}
           height={3}

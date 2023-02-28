@@ -3,7 +3,7 @@ import { sprinkles } from "@styles/sprinkles.css";
 import { vars } from "@styles/config/contract.css";
 
 const {
-  colors: { jadedGinger, harbour, white },
+  color: { primary, secondary, white },
 } = vars;
 export const root = recipe({
   base: {
@@ -43,10 +43,10 @@ export const root = recipe({
     },
     color: {
       primary: sprinkles({
-        bg: "jadedGinger",
+        bg: "primary",
       }),
       secondary: sprinkles({
-        bg: "jadedGinger",
+        bg: "primary",
       }),
       transparent: sprinkles({
         bg: "transparent",
@@ -59,7 +59,7 @@ export const root = recipe({
     },
     outline: {
       none: {},
-      jadedGinger: {
+      primary: {
         letterSpacing: "1px",
         outline: "0",
         border: "1px solid black",
@@ -73,7 +73,7 @@ export const root = recipe({
         selectors: {
           "&:after": {
             content: '""',
-            background: jadedGinger,
+            background: primary,
             width: "100%",
             zIndex: -1,
             position: "absolute",
@@ -96,7 +96,7 @@ export const root = recipe({
   compoundVariants: [
     {
       variants: {
-        outline: "jadedGinger",
+        outline: "primary",
         selected: true,
       },
       style: {
@@ -104,7 +104,7 @@ export const root = recipe({
           "&:after": {
             top: "0px",
             left: "0px",
-            backgroundColor: `${harbour}`,
+            backgroundColor: secondary,
           },
         },
       },

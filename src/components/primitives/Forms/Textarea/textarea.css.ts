@@ -2,6 +2,8 @@
 import { sprinkles } from "@styles/sprinkles.css";
 import { vars } from "@styles/config/contract.css";
 
+const { color } = vars;
+
 export const root = recipe({
   base: [
     { outline: "none" },
@@ -19,13 +21,13 @@ export const root = recipe({
   variants: {
     error: {
       true: {
-        border: `1px solid ${vars.colors.jadedGinger}`,
-        color: vars.colors.jadedGinger,
+        border: `1px solid ${color.error}`,
+        color: color.error,
       },
     },
     color: {
       gray: {
-        border: `1px solid ${vars.colors.harbour}`,
+        border: `1px solid ${color.dimmed}`,
       },
     },
   },

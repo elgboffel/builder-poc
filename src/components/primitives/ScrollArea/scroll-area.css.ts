@@ -2,9 +2,7 @@
 import { vars } from "@styles/config/contract.css";
 const SCROLLBAR_SIZE = 6;
 
-const {
-  colors: { harbour, jadedGinger },
-} = vars;
+const { color } = vars;
 export const scrollAreaRootStyle = style({
   width: "inherit",
   height: "inherit",
@@ -38,7 +36,7 @@ export const scrollAreaScrollbarStyle = style({
 
 export const scrollAreaThumbStyle = style({
   flex: 1,
-  background: jadedGinger,
+  background: color.dimmed,
   borderRadius: `${SCROLLBAR_SIZE}px`,
   position: "relative",
   selectors: {

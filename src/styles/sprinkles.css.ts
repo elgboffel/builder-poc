@@ -7,20 +7,8 @@ import {
 } from "@vanilla-extract/sprinkles";
 import { BREAKPOINTS } from "@styles/config/constants";
 import { transformBreakpoints, TransformResponsiveBreakpoints } from "@styles/helpers";
-import {
-  fontWeights,
-  lineHeights,
-  radii,
-  shadows,
-  space,
-  sizes,
-  zIndices,
-  fontSizes,
-} from "@styles/config/common-vars.css";
-import { colors, fonts } from "@styles/theme.css";
-// import { vars } from "@styles/config/contract.css";
-//
-// const { fontWeights, lineHeights, radii, shadows, space, sizes, zIndices, fontSizes, colors, fonts } = vars;
+import { fontWeight, lineHeight, radii, shadow, space, size, zIndices } from "@styles/config/common-vars.css";
+import { color, font, fontSize } from "@styles/theme.css";
 
 const unresponsiveProperties = defineProperties({
   conditions: {
@@ -31,27 +19,27 @@ const unresponsiveProperties = defineProperties({
   defaultCondition: "default",
   properties: {
     all: ["unset", "initial", "inherit"],
-    fontFamily: fonts,
-    lineHeight: lineHeights,
+    fontFamily: font,
+    lineHeight: lineHeight,
     textAlign: ["center", "left", "right"],
     textTransform: ["lowercase", "uppercase"],
-    fontWeight: fontWeights,
+    fontWeight: fontWeight,
     textDecoration: ["none", "underline"],
     borderRadius: radii,
-    borderSize: sizes,
-    borderWidth: sizes,
+    borderSize: size,
+    borderWidth: size,
     gap: {
-      xs: sizes["1"],
-      sm: sizes["2"],
-      md: sizes["3"],
-      lg: sizes["4"],
-      xl: sizes["5"],
+      xs: size["1"],
+      sm: size["2"],
+      md: size["3"],
+      lg: size["4"],
+      xl: size["5"],
     },
     borderStyle: ["solid", "dotted"],
-    borderColor: colors,
-    boxShadow: shadows,
-    background: colors,
-    color: colors,
+    borderColor: color,
+    boxShadow: shadow,
+    background: color,
+    color,
     flexWrap: ["wrap", "nowrap"],
     top: [0],
     bottom: [0],
@@ -83,7 +71,7 @@ const responsiveProperties = defineProperties({
     flexDirection: ["row", "row-reverse", "column", "column-reverse"],
     flexWrap: ["wrap", "nowrap"],
     position: ["absolute", "relative", "fixed", "sticky"],
-    fontSize: fontSizes,
+    fontSize: fontSize,
     paddingTop: space,
     paddingBottom: space,
     paddingLeft: space,
@@ -96,10 +84,10 @@ const responsiveProperties = defineProperties({
     overflow: ["hidden"],
     opacity: [0, 0.3, 0.5, 0.7, 1],
     textAlign: ["left", "center", "right"],
-    minWidth: sizes,
-    maxWidth: sizes,
-    width: sizes,
-    height: sizes,
+    minWidth: size,
+    maxWidth: size,
+    width: size,
+    height: size,
     transition: {
       slow: "transform .3s ease, opacity .3s ease",
       fast: "transform .15s ease, opacity .15s ease",

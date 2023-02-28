@@ -2,27 +2,24 @@
 import { sprinkles } from "@styles/sprinkles.css";
 import { vars } from "@styles/config/contract.css";
 
-const {
-  colors: { white, body, harbour, jadedGinger },
-  space: { sm },
-} = vars;
+const { color, space } = vars;
 export const selectTrigger = style([
   {
     lineHeight: 1,
     gap: "5px",
     paddingTop: 0,
     paddingBottom: 0,
-    paddingLeft: sm,
-    paddingRight: sm,
-    border: `1px solid ${harbour}`,
+    paddingLeft: space.sm,
+    paddingRight: space.sm,
+    border: `1px solid ${color.dimmed}`,
     ":hover": {
-      background: `${harbour}`,
+      background: `${color.secondary}`,
     },
     ":focus": {
-      border: `1px solid ${jadedGinger}`,
+      border: `1px solid ${color.secondary}`,
     },
     selectors: {
-      "&[data-placeholder]": { color: `${jadedGinger}` },
+      "&[data-placeholder]": { color: `${color.secondary}` },
     },
   },
   sprinkles({
@@ -33,17 +30,17 @@ export const selectTrigger = style([
     borderRadius: "m",
     fontSize: "sm",
     height: 3,
-    color: "body",
+    color: "text",
   }),
 ]);
 
 export const selectIcon = style({
-  color: `${jadedGinger}`,
+  color: `${color.primary}`,
 });
 
 export const selectContent = style({
   overflow: "hidden",
-  background: `${white}`,
+  background: `${color.white}`,
   borderRadius: "m",
   boxShadow: `0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2)`,
 });
@@ -58,8 +55,8 @@ export const selectItem = style(
     lineHeight: 1,
     userSelect: "none",
     selectors: {
-      "&[data-disabled]": { color: `${harbour}`, pointerEvents: "none" },
-      "&[data-highlighted]": { background: `${jadedGinger}`, pointerEvents: "none" },
+      "&[data-disabled]": { color: `${color.dimmed}`, pointerEvents: "none" },
+      "&[data-highlighted]": { background: `${color.dimmed}`, pointerEvents: "none" },
     },
   },
   sprinkles({
@@ -67,7 +64,7 @@ export const selectItem = style(
     display: "flex",
     alignItems: "center",
     fontSize: "sm",
-    color: `jadedGinger`,
+    color: `primary`,
     borderRadius: "sm",
     height: 6,
     paddingTop: 0,
@@ -87,7 +84,7 @@ export const selectLabel = style(
     paddingBottom: 0,
     paddingLeft: 6,
     fontSize: "sm",
-    color: "body",
+    color: "text",
   })
 );
 
@@ -96,7 +93,7 @@ export const selectSeparator = style(
     height: "1px",
   },
   sprinkles({
-    background: "harbour",
+    background: "dimmed",
     marginTop: 1,
     marginRight: 1,
     marginBottom: 1,
@@ -123,7 +120,7 @@ export const selectScrollButton = style([
     justifyContent: "center",
     height: 6,
     background: "white",
-    color: "harbour",
+    color: "dimmed",
   }),
 ]);
 
@@ -141,7 +138,7 @@ export const variantBase = style([
     color: "white",
     ":after": {
       content: '""',
-      backgroundColor: `${jadedGinger}`,
+      backgroundColor: `${color.dimmed}`,
       width: "100%",
       zIndex: -1,
       position: "absolute",
@@ -169,11 +166,11 @@ export const variantBase = style([
 export const variantBaseChosen = style([
   variantBase,
   {
-    color: `${white}`,
+    color: `${color.white}`,
     ":after": {
       top: "0px",
       left: "0px",
-      backgroundColor: `${harbour}`,
+      backgroundColor: `${color.dimmed}`,
     },
   },
 ]);

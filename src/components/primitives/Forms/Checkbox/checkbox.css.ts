@@ -2,11 +2,13 @@ import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
 import { sprinkles } from "@styles/sprinkles.css";
 import { vars } from "@styles/config/contract.css";
 
+const { color } = vars;
+
 export const root = recipe({
   base: [
     {
       all: "unset",
-      border: `solid 1px ${vars.colors.eastlakeGold}`,
+      border: `solid 1px ${color.dimmed}`,
       selectors: {
         "&:hover": { borderColor: "focus" },
         "&:focus-visible": { borderColor: "focus" },
@@ -43,8 +45,8 @@ export const root = recipe({
       black: {
         selectors: {
           "&[data-state='checked']": {
-            bg: "black",
-            borderColor: "black",
+            bg: color.black,
+            borderColor: color.black,
           },
         },
       },
@@ -60,8 +62,8 @@ export const root = recipe({
 
     error: {
       true: {
-        background: vars.colors.jadedGinger,
-        color: vars.colors.white,
+        background: color.error,
+        color: color.white,
       },
     },
   },

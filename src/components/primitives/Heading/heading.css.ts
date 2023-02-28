@@ -5,7 +5,7 @@ export const root = recipe({
   base: [
     sprinkles({
       fontFamily: "heading",
-      color: "heading",
+      color: "text",
       lineHeight: "heading",
       marginTop: 0,
       marginBottom: 0,

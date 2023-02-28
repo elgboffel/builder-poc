@@ -1,25 +1,27 @@
 import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
 import { sprinkles } from "@styles/sprinkles.css";
 import { vars } from "@styles/config/contract.css";
+import { fontWeight } from "@styles/config/common-vars.css";
+const { fontSize, lineHeight } = vars;
 
 export const root = recipe({
   base: sprinkles({ fontFamily: "text", lineHeight: "text", fontSize: "text", marginTop: 0, marginBottom: 0 }),
   variants: {
     size: {
       tiny: {
-        fontSize: vars.fontSizes.tiny,
+        fontSize: fontSize.tiny,
       },
       xs: {
-        fontSize: vars.fontSizes.xs,
-        lineHeight: vars.lineHeights.text,
+        fontSize: fontSize.xs,
+        lineHeight: lineHeight.text,
       },
       sm: {
-        fontSize: vars.fontSizes.sm,
-        lineHeight: vars.lineHeights.text,
+        fontSize: fontSize.sm,
+        lineHeight: lineHeight.text,
       },
       md: {
-        fontSize: vars.fontSizes.md,
-        lineHeight: vars.lineHeights.text,
+        fontSize: fontSize.md,
+        lineHeight: lineHeight.text,
       },
       lg: sprinkles({
         fontSize: ["md", "lg"],
@@ -33,10 +35,10 @@ export const root = recipe({
     },
     weight: {
       light: {
-        fontWeight: vars.fontWeights.light,
+        fontWeight: fontWeight.light,
       },
       bold: {
-        fontWeight: vars.fontWeights.bold,
+        fontWeight: fontWeight.bold,
       },
     },
     caps: {

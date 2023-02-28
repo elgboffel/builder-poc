@@ -21,12 +21,12 @@ const FormLabel: React.FC<AnimatedLabelProps> = ({ focus, error, name, text, req
       position="absolute"
       className={root}
       variants={labelVariants}
-      {...(error && { color: "jadedGinger" })}
+      {...(error && { color: "error" })}
     >
       <Label htmlFor={name}>
         <MotionBox variants={textVariants}>
           {required ? (
-            <Box as={"span"} color={"jadedGinger"} mr={1}>
+            <Box as={"span"} color={"primary"} mr={1}>
               *
             </Box>
           ) : null}
