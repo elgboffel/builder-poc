@@ -1,12 +1,11 @@
 schema:
-    - ${NEXT_PUBLIC_COMMERCE_GRAPHQL_ENDPOINT}:
-          headers:
-            Authorization: Bearer ${CENTRA_API_WRITE_TOKEN}
+    - ${NEXT_PUBLIC_CONTENT_GQL_ENDPOINT}/${NEXT_PUBLIC_CONTENT_PUBLIC_KEY}:
+          headers
 documents: src/**/*.graphql
 overwrite: true
 verbose: true
 generates:
-    ${CODEGEN_ROOT_FOLDER_PATH}/commerce/index.ts:
+    ${CODEGEN_ROOT_FOLDER_PATH}/content/index.ts:
         hooks:
             afterAllFileWrite:
                 - prettier --write

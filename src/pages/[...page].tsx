@@ -4,6 +4,9 @@ import Head from "next/head";
 import React from "react";
 import { BuilderComponent, builder, useIsPreviewing, Builder } from "@builder.io/react";
 import { GetStaticPathsContext, GetStaticPropsContext, InferGetStaticPropsType } from "next";
+import { appRouter } from "@server/root";
+import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import superjson from "superjson";
 
 export async function getStaticProps({ params }: GetStaticPropsContext<{ page: string[] }>) {
   // Fetch the first page from Builder that matches the current URL.
@@ -17,9 +20,25 @@ export async function getStaticProps({ params }: GetStaticPropsContext<{ page: s
     })
     .toPromise();
 
+  const ssg = await createProxySSGHelpers({
+    router: appRouter,
+    ctx: { session: null }, // No auth yet
+    transformer: superjson,
+  });
+
+  let settings;
+
+  try {
+    settings = await ssg.content.getSettings.fetch({
+      preview: false,
+    });
+  } catch (e) {
+    console.error(e);
+  }
   return {
     props: {
-      page: page || null,
+      settings: settings ?? null,
+      page: page ?? null,
     },
     revalidate: 5,
   };
@@ -41,7 +60,7 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   };
 }
 
-export default function Page({ page }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Page({ page, ...rest }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
   //  This flag indicates if you are viewing the page in the Builder editor.
   const isPreviewing = useIsPreviewing();
@@ -49,7 +68,6 @@ export default function Page({ page }: InferGetStaticPropsType<typeof getStaticP
   if (router.isFallback) {
     return <h1>Loading...</h1>;
   }
-
   //  Add your error page here to return if there are no matching
   //  content entries published in Builder.
   if (!page && !isPreviewing) {

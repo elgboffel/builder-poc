@@ -1,0 +1,10 @@
+query GetSettings {
+  settings {
+    id
+    name
+    content
+    data {
+      navigation
+    }
+  }
+}

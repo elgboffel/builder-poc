@@ -7,7 +7,7 @@
     "dev": "next dev",
     "start": "next start",
     "codegen:commerce-checkout": "dotenv -- cross-var openapi-generator-cli generate -i %CENTRA_CHECKOUT_SWAGGER_ENDPOINT% -g typescript -o %CODEGEN_ROOT_FOLDER_PATH%/commerce/checkout --global-property models --additional-properties=supportsES6=true,npmVersion=9.2.0 -a API-Authorization:%CENTRA_CHECKOUT_API_SHARED_SECRET% --skip-validate-spec && npm run codegen:commerce-checkout-replace-backwards-slash && npm run codegen:lint-fix",
-    "codegen:commerce-graphql": "graphql-codegen -r dotenv/config --config ./graphql-codegen.config.yml && npm run codegen:lint-fix",
+    "codegen:gql": "graphql-codegen -r dotenv/config --config ./graphql-codegen.config.yml && npm run codegen:lint-fix",
     "codegen:lint-fix": "cross-var eslint \"src/infrastructure/types/generated/**/*.ts\" --fix --no-ignore && cross-var prettier --write \"src/infrastructure/types/generated/**/*.{ts,md}\"",
     "codegen:clean-commerce": "rimraf cross-var %CODEGEN_ROOT_FOLDER_PATH%/commerce* -Recurse",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
