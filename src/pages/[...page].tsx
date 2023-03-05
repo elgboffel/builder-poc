@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import DefaultErrorPage from "next/error";
 import Head from "next/head";
 import React from "react";
-import { BuilderComponent, builder, useIsPreviewing, Builder } from "@builder.io/react";
+import { BuilderComponent, builder, useIsPreviewing } from "@builder.io/react";
 import { GetStaticPathsContext, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { appRouter } from "@server/root";
 import { createProxySSGHelpers } from "@trpc/react-query/ssg";
@@ -64,6 +64,7 @@ export default function Page({ page, ...rest }: InferGetStaticPropsType<typeof g
   const router = useRouter();
   //  This flag indicates if you are viewing the page in the Builder editor.
   const isPreviewing = useIsPreviewing();
+
   console.info({ page });
   if (router.isFallback) {
     return <h1>Loading...</h1>;
@@ -96,34 +97,3 @@ export default function Page({ page, ...rest }: InferGetStaticPropsType<typeof g
     </>
   );
 }
-
-//  This is an example of registering a custom component to be used in Builder.io.
-//  You would typically do this in the file where the component is defined.
-
-const MyCustomComponent = (props: any) => (
-  <div>
-    <h1>{props.title}</h1>
-    <p>{props.description}</p>
-  </div>
-);
-
-//  This is a minimal example of a custom component, you can view more complex input types here:
-//  https://www.builder.io/c/docs/custom-react-components#input-types
-Builder.registerComponent(MyCustomComponent, {
-  name: "ExampleCustomComponent",
-  inputs: [
-    { name: "title", type: "string", defaultValue: "I am a React component!" },
-    {
-      name: "description",
-      type: "string",
-      defaultValue: "Find my source in /[...page].tsx",
-    },
-  ],
-});
-
-// Register a custom insert menu to organize your custom componnets
-// https://www.builder.io/c/docs/custom-components-visual-editor#:~:text=than%20this%20screenshot.-,organizing%20your%20components%20in%20custom%20sections,-You%20can%20create
-Builder.register("insertMenu", {
-  name: "My Components",
-  items: [{ item: "ExampleCustomComponent", name: "My React Component" }],
-});

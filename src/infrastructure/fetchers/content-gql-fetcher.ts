@@ -5,7 +5,7 @@ import { graphQLFetcher } from "@infrastructure/fetchers/graphql-fetcher";
 
 export const contentGQLFetcher = <T>(args: Omit<GraphQLFetcher, "url">) => {
   const getApiUrl = (preview?: boolean): string => {
-    const apiToken = isServer ? serverEnv.CONTENT_PUBLIC_KEY : clientEnv.CONTENT_PUBLIC_KEY;
+    const apiToken = isServer ? serverEnv.CONTENT_PUBLIC_KEY : clientEnv.NEXT_PUBLIC_CONTENT_PUBLIC_KEY;
 
     const baseUrl = `${serverEnv.CONTENT_GQL_ENDPOINT}/${apiToken}`;
     return `${baseUrl}`;

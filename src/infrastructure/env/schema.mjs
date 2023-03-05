@@ -42,8 +42,8 @@ export const serverEnv = {
  * To expose them to the client, prefix them with `NEXT_PUBLIC_`.
  */
 export const clientSchema = z.object({
-  CONTENT_PUBLIC_KEY: z.string(),
-  CONTENT_GQL_ENDPOINT: z.string(),
+  NEXT_PUBLIC_CONTENT_PUBLIC_KEY: z.string(),
+  NEXT_PUBLIC_CONTENT_GQL_ENDPOINT: z.string(),
 });
 
 /**
@@ -53,6 +53,6 @@ export const clientSchema = z.object({
  * @type {{ [k in keyof z.infer<typeof clientSchema>]: z.infer<typeof clientSchema>[k] | undefined }}
  */
 export const clientEnv = {
-  CONTENT_PUBLIC_KEY: process.env.NEXT_PUBLIC_CONTENT_PUBLIC_KEY,
-  CONTENT_GQL_ENDPOINT: process.env.NEXT_PUBLIC_CONTENT_GQL_ENDPOINT,
+  NEXT_PUBLIC_CONTENT_PUBLIC_KEY: process.env.NEXT_PUBLIC_CONTENT_PUBLIC_KEY,
+  NEXT_PUBLIC_CONTENT_GQL_ENDPOINT: process.env.NEXT_PUBLIC_CONTENT_GQL_ENDPOINT,
 };
