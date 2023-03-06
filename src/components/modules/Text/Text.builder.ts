@@ -2,17 +2,16 @@
 //  https://www.builder.io/c/docs/custom-react-components#input-types
 import { Builder } from "@builder.io/react";
 import { Text } from "./Text";
+import { Input } from "@builder.io/sdk";
+
+const textSchema: Input[] = [
+  { name: "heading", type: "string", defaultValue: "Add heading" },
+  { name: "text", type: "richText", defaultValue: "<p>Add text</p>" },
+];
 
 Builder.registerComponent(Text, {
-  name: "BodyText",
-  image: "https://tabler-icons.io/static/tabler-icons/icons-png/align-box-left-middle.png",
+  name: "Text",
   models: ["page"],
-  inputs: [
-    { name: "heading", type: "string", defaultValue: "Heading" },
-    {
-      name: "text",
-      type: "string",
-      defaultValue: "Text",
-    },
-  ],
+  override: true,
+  inputs: textSchema,
 });

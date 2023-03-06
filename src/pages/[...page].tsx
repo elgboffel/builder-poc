@@ -20,6 +20,8 @@ export async function getStaticProps({ params }: GetStaticPropsContext<{ page: s
     })
     .toPromise();
 
+  type content = Awaited<ReturnType<typeof page>>;
+
   const ssg = await createProxySSGHelpers({
     router: appRouter,
     ctx: { session: null }, // No auth yet

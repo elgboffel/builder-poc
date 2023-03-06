@@ -13,8 +13,9 @@ builder.init("ffb2ed83b4ea4cbaa059204ca3693d3a" || "");
 // https://www.builder.io/c/docs/custom-components-visual-editor#:~:text=than%20this%20screenshot.-,organizing%20your%20components%20in%20custom%20sections,-You%20can%20create
 Builder.register("insertMenu", {
   name: "Blocks",
-  items: [{ name: "BodyText" }],
+  items: [{ name: "Text" }],
 });
+import "@components/modules/Text/Text.builder";
 
 type AppPropsWithLayout = AppProps<Page<unknown, PageContextBase, unknown>> & {
   Component: NextPageWithLayout;
