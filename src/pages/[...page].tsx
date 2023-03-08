@@ -7,11 +7,46 @@ import { GetStaticPathsContext, GetStaticPropsContext, InferGetStaticPropsType }
 import { appRouter } from "@server/root";
 import { createProxySSGHelpers } from "@trpc/react-query/ssg";
 import superjson from "superjson";
+import { Navigation } from "@components/modules/Navigation/Navigation";
+
+export default function Page({ page, settings }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
+  //  This flag indicates if you are viewing the page in the Builder editor.
+  const isPreviewing = useIsPreviewing();
+
+  if (router.isFallback) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (!page && !isPreviewing) {
+    return <DefaultErrorPage statusCode={404} />;
+  }
+
+  return (
+    <>
+      <Head>
+        {/* Add any relevant SEO metadata or open graph tags here */}
+        <title>{page?.data.title}</title>
+        <meta name="description" content={page?.data.descripton} />
+      </Head>
+      <Navigation collection={settings?.navigation} />
+      <div style={{ padding: 50, textAlign: "center" }}>
+        {/* Put your header or main layout here */}
+        Your header
+      </div>
+
+      {/* Render the Builder page */}
+      <BuilderComponent model="page" content={page} />
+
+      <div style={{ padding: 50, textAlign: "center" }}>
+        {/* Put your footer or main layout here */}
+        Your footer
+      </div>
+    </>
+  );
+}
 
 export async function getStaticProps({ params }: GetStaticPropsContext<{ page: string[] }>) {
-  // Fetch the first page from Builder that matches the current URL.
-  // Use the `userAttributes` field for targeting content.
-  // For more, see https://www.builder.io/c/docs/targeting-with-builder
   const page = await builder
     .get("page", {
       userAttributes: {
@@ -19,8 +54,6 @@ export async function getStaticProps({ params }: GetStaticPropsContext<{ page: s
       },
     })
     .toPromise();
-
-  type content = Awaited<ReturnType<typeof page>>;
 
   const ssg = await createProxySSGHelpers({
     router: appRouter,
@@ -60,42 +93,4 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
     paths: pages.map((page) => `${page.data?.url}`),
     fallback: true,
   };
-}
-
-export default function Page({ page, ...rest }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const router = useRouter();
-  //  This flag indicates if you are viewing the page in the Builder editor.
-  const isPreviewing = useIsPreviewing();
-
-  console.info({ page });
-  if (router.isFallback) {
-    return <h1>Loading...</h1>;
-  }
-  //  Add your error page here to return if there are no matching
-  //  content entries published in Builder.
-  if (!page && !isPreviewing) {
-    return <DefaultErrorPage statusCode={404} />;
-  }
-
-  return (
-    <>
-      <Head>
-        {/* Add any relevant SEO metadata or open graph tags here */}
-        <title>{page?.data.title}</title>
-        <meta name="description" content={page?.data.descripton} />
-      </Head>
-      <div style={{ padding: 50, textAlign: "center" }}>
-        {/* Put your header or main layout here */}
-        Your header
-      </div>
-
-      {/* Render the Builder page */}
-      <BuilderComponent model="page" content={page} />
-
-      <div style={{ padding: 50, textAlign: "center" }}>
-        {/* Put your footer or main layout here */}
-        Your footer
-      </div>
-    </>
-  );
 }

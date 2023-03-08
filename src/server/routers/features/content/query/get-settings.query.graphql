@@ -1,8 +1,6 @@
 query GetSettings {
-  settings {
+  oneSettings(query: { id: ee61023a3ff24c65964d7b1ce2a59bf5  }) {
     id
-    name
-    content
     data {
       navigation
     }

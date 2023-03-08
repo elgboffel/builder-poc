@@ -6,7 +6,7 @@ const getSettings = async (preview: boolean) => {
     query: GetSettingsDocument,
     preview,
   });
-  return queryResponse.data.settings;
+  return queryResponse.data.oneSettings?.data;
 };
 
 export const contentService = {
