@@ -4,6 +4,26 @@ import { CaretDownIcon } from "@radix-ui/react-icons";
 import React from "react";
 import { Link } from "@components/primitives/Link/Link";
 import { WithChildren } from "@infrastructure/types/helpers/with-children";
+import {
+  arrow,
+  calloutHeading,
+  calloutText,
+  caretDown,
+  list,
+  listItemHeading,
+  listItemText,
+  listOne,
+  listTwo,
+  navigationMenuContent,
+  navigationMenuIndicator,
+  navigationMenuLink,
+  navigationMenuListItem,
+  navigationMenuRoot,
+  navigationMenuTrigger,
+  navigationMenuViewport,
+  viewportPosition,
+} from "@components/modules/Navigation/Navigation.css";
+import classNames from "classnames";
 
 export type LinkField = {
   name: string;
@@ -20,14 +40,14 @@ export interface NavigationProps {
 export const Navigation: FC<NavigationProps> = ({ collection }) => {
   console.info({ collection });
   return (
-    <NavigationMenu.Root className="NavigationMenuRoot">
-      <NavigationMenu.List className="NavigationMenuList">
+    <NavigationMenu.Root className={navigationMenuRoot}>
+      <NavigationMenu.List className={navigationMenuListItem}>
         <NavigationMenu.Item>
-          <NavigationMenu.Trigger className="NavigationMenuTrigger">
-            Learn <CaretDownIcon className="CaretDown" aria-hidden />
+          <NavigationMenu.Trigger className={navigationMenuTrigger}>
+            Learn <CaretDownIcon className={caretDown} aria-hidden />
           </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="NavigationMenuContent">
-            <ul className="List one">
+          <NavigationMenu.Content className={navigationMenuContent}>
+            <ul className={classNames(list, listOne)}>
               <li style={{ gridRow: "span 3" }}>
                 <NavigationMenu.Link asChild>
                   <Link href="/">
@@ -36,8 +56,8 @@ export const Navigation: FC<NavigationProps> = ({ collection }) => {
                       <path d="M12 0H4V8H12V0Z"></path>
                       <path d="M17 8C19.2091 8 21 6.20914 21 4C21 1.79086 19.2091 0 17 0C14.7909 0 13 1.79086 13 4C13 6.20914 14.7909 8 17 8Z"></path>
                     </svg>
-                    <div className="CalloutHeading">Radix Primitives</div>
-                    <p className="CalloutText">Unstyled, accessible components for React.</p>
+                    <div className={calloutHeading}>Radix Primitives</div>
+                    <p className={calloutText}>Unstyled, accessible components for React.</p>
                   </Link>
                 </NavigationMenu.Link>
               </li>
@@ -56,11 +76,11 @@ export const Navigation: FC<NavigationProps> = ({ collection }) => {
         </NavigationMenu.Item>
 
         <NavigationMenu.Item>
-          <NavigationMenu.Trigger className="NavigationMenuTrigger">
-            Overview <CaretDownIcon className="CaretDown" aria-hidden />
+          <NavigationMenu.Trigger className={navigationMenuTrigger}>
+            Overview <CaretDownIcon className={caretDown} aria-hidden />
           </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="NavigationMenuContent">
-            <ul className="List two">
+          <NavigationMenu.Content className={navigationMenuContent}>
+            <ul className={classNames(list, listTwo)}>
               <ListItem title="Introduction" href="/docs/primitives/overview/introduction">
                 Build high-quality, accessible design systems and web apps.
               </ListItem>
@@ -84,18 +104,18 @@ export const Navigation: FC<NavigationProps> = ({ collection }) => {
         </NavigationMenu.Item>
 
         <NavigationMenu.Item>
-          <NavigationMenu.Link className="NavigationMenuLink" href="https://github.com/radix-ui">
+          <NavigationMenu.Link className={navigationMenuLink} href="https://github.com/radix-ui">
             Github
           </NavigationMenu.Link>
         </NavigationMenu.Item>
 
-        <NavigationMenu.Indicator className="NavigationMenuIndicator">
-          <div className="Arrow" />
+        <NavigationMenu.Indicator className={navigationMenuIndicator}>
+          <div className={arrow} />
         </NavigationMenu.Indicator>
       </NavigationMenu.List>
 
-      <div className="ViewportPosition">
-        <NavigationMenu.Viewport className="NavigationMenuViewport" />
+      <div className={viewportPosition}>
+        <NavigationMenu.Viewport className={navigationMenuViewport} />
       </div>
     </NavigationMenu.Root>
   );
@@ -106,8 +126,8 @@ const ListItem = React.forwardRef<HTMLAnchorElement, { title?: string; href: str
     <li>
       <NavigationMenu.Link asChild>
         <Link {...props} ref={forwardedRef}>
-          <div className="ListItemHeading">{title}</div>
-          <p className="ListItemText">{children}</p>
+          <div className={listItemHeading}>{title}</div>
+          <p className={listItemText}>{children}</p>
         </Link>
       </NavigationMenu.Link>
     </li>
