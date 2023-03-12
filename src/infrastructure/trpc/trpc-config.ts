@@ -21,7 +21,7 @@ const getBaseUrl = () => {
  * A set of typesafe react-query hooks for your tRPC API
  */
 export const server = createTRPCNext<AppRouter>({
-  config() {
+  config({ ctx }) {
     return {
       /**
        * Transformer used for data de-serialization from the server
@@ -40,6 +40,28 @@ export const server = createTRPCNext<AppRouter>({
         }),
         httpBatchLink({
           url: `${getBaseUrl()}/api/trpc`,
+          /**
+           * Set custom request headers on every request from tRPC
+           * @link https://trpc.io/docs/v10/header
+           */
+          headers() {
+            if (ctx?.req) {
+              // To use SSR properly, you need to forward the client's headers to the server
+              // This is so you can pass through things like cookies when we're server-side rendering
+              // If you're using Node 18, omit the "connection" header
+              const {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                connection: _connection,
+                ...headers
+              } = ctx.req.headers;
+              return {
+                ...headers,
+                // Optional: inform server that it's an SSR request
+                "x-ssr": "1",
+              };
+            }
+            return {};
+          },
         }),
       ],
     };
@@ -48,23 +70,23 @@ export const server = createTRPCNext<AppRouter>({
    * Whether tRPC should await queries when server rendering pages
    * @see https://trpc.io/docs/nextjs#ssr-boolean-default-false
    */
-  ssr: false,
+  ssr: true,
   /* Enable caching on SSR */
-  // responseMeta({ clientErrors }) {
-  //   if (clientErrors.length) {
-  //     // propagate http first error from API calls
-  //     return {
-  //       status: clientErrors[0]?.data?.httpStatus ?? 500,
-  //     };
-  //   }
-  //   // cache request for 1 day + revalidate once every second
-  //   const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
-  //   return {
-  //     headers: {
-  //       "cache-control": `s-maxage=1, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`,
-  //     },
-  //   };
-  // },
+  responseMeta({ clientErrors }) {
+    if (clientErrors.length) {
+      // propagate http first error from API calls
+      return {
+        status: clientErrors[0]?.data?.httpStatus ?? 500,
+      };
+    }
+    // cache request for 1 day + revalidate once every second
+    const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+    return {
+      headers: {
+        "cache-control": `s-maxage=1, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`,
+      },
+    };
+  },
 });
 
 /**

@@ -8,6 +8,8 @@ import NextNProgress from "nextjs-progressbar";
 
 /* Init builder and register components */
 import "@infrastructure/builder/config";
+import { settingsAtom } from "@infrastructure/hooks/use-settings/atoms";
+import { NextComponentType } from "next";
 
 type AppPropsWithLayout = AppProps<Page<unknown, PageContextBase, unknown>> & {
   Component: NextPageWithLayout;
@@ -18,9 +20,16 @@ const { color } = vars;
 const Site = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
 
+  /* We dom't want to init our page without pageprops */
+  // if (!pageProps.page) return;
+
   return (
     <SessionProvider session={pageProps.session}>
-      <RecoilRoot>
+      <RecoilRoot
+        initializeState={({ set }) => {
+          if (pageProps?.context?.settings) set(settingsAtom, pageProps?.context?.settings);
+        }}
+      >
         <NextNProgress
           color={color.primary}
           startPosition={0.3}
@@ -36,4 +45,5 @@ const Site = ({ Component, pageProps }: AppPropsWithLayout) => {
   );
 };
 
-export default server.withTRPC(Site);
+//TODO: remove cast for some reason app initially renders twice so add a check to see if pageProps.page is set
+export default server.withTRPC(Site as NextComponentType);

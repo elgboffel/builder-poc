@@ -2,12 +2,18 @@ import { GetStaticPropsContext, NextPage } from "next";
 import { ReactElement, ReactNode } from "react";
 import { Session } from "next-auth";
 import { BaseError } from "@infrastructure/errors/types";
+import { SettingsData } from "@infrastructure/types/generated/content";
 
-/* TODO: add relevant types */
+export type PageCMSSettings = SettingsData;
+
+export type ContextSettings = {
+  cms?: PageCMSSettings;
+  commerce?: never;
+};
+
 export type PageContextBase = GetStaticPropsContext & {
-  dictionary?: unknown;
-  cmsSettings?: unknown;
-  commerceSettings?: unknown;
+  dictionary?: never;
+  settings: ContextSettings;
 };
 
 export type GenericPage = {

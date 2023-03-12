@@ -7,9 +7,10 @@ import { GetStaticPathsContext, GetStaticPropsContext, InferGetStaticPropsType }
 import { appRouter } from "@server/root";
 import { createProxySSGHelpers } from "@trpc/react-query/ssg";
 import superjson from "superjson";
-import { Navigation } from "@components/modules/Navigation/Navigation";
+import { withNextPageError } from "@infrastructure/errors/with-next-page-error";
+import { MainLayout } from "@components/modules/Layouts/MainLayout";
 
-export default function Page({ page, settings }: InferGetStaticPropsType<typeof getStaticProps>) {
+const Page = ({ page }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
   //  This flag indicates if you are viewing the page in the Builder editor.
   const isPreviewing = useIsPreviewing();
@@ -29,7 +30,6 @@ export default function Page({ page, settings }: InferGetStaticPropsType<typeof 
         <title>{page?.data.title}</title>
         <meta name="description" content={page?.data.descripton} />
       </Head>
-      <Navigation collection={settings?.navigation} />
       <div style={{ padding: 50, textAlign: "center" }}>
         {/* Put your header or main layout here */}
         Your header
@@ -44,7 +44,7 @@ export default function Page({ page, settings }: InferGetStaticPropsType<typeof 
       </div>
     </>
   );
-}
+};
 
 export async function getStaticProps({ params }: GetStaticPropsContext<{ page: string[] }>) {
   const page = await builder
@@ -61,28 +61,27 @@ export async function getStaticProps({ params }: GetStaticPropsContext<{ page: s
     transformer: superjson,
   });
 
-  let settings;
+  let cmsSettings;
 
   try {
-    settings = await ssg.content.getSettings.fetch({
+    cmsSettings = await ssg.content.getSettings.fetch({
       preview: false,
     });
   } catch (e) {
     console.error(e);
   }
+
   return {
     props: {
-      settings: settings ?? null,
+      context: { settings: { cms: cmsSettings } },
       page: page ?? null,
+      trpcState: ssg.dehydrate(),
     },
     revalidate: 5,
   };
 }
 
 export async function getStaticPaths({ locales }: GetStaticPathsContext) {
-  //  Fetch all published pages for the current model.
-  //  Using the `fields` option will limit the size of the response
-  //  and only return the `data.url` field from the matching pages.
   const pages = await builder.getAll("page", {
     fields: "data.url", // only request the `data.url` field
     options: { noTargeting: true },
@@ -94,3 +93,9 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
     fallback: true,
   };
 }
+
+const withErrorPage = withNextPageError(Page);
+
+withErrorPage.getLayout = (page: React.ReactElement) => <MainLayout>{page}</MainLayout>;
+
+export default withErrorPage;
