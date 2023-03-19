@@ -1,9 +1,3 @@
-/* reset */
-// button,
-//   p {
-//   all: unset;
-// }
-
 import { keyframes, style } from "@vanilla-extract/css";
 import { vars } from "@styles/config/contract.css";
 
@@ -120,7 +114,6 @@ export const navigationMenuListItem = style({
   userSelect: "none",
   lineHeight: 1,
   borderRadius: 4,
-  fontSize: size["2"],
   color: textColor,
 });
 
@@ -130,8 +123,9 @@ export const navigationMenuLinkBase = style({
   userSelect: "none",
   lineHeight: 1,
   borderRadius: 4,
-  fontSize: size["2"],
   color: textColor,
+  all: "unset",
+
   ":hover": {
     boxShadow: `0 0 0 2px ${color.primary}`, //TODO
   },
@@ -164,7 +158,6 @@ export const navigationMenuLink = style([
   {
     display: "block",
     textDecoration: "none",
-    fontSize: size["2"], //TODO
     lineHeight: 1,
   },
 ]);
@@ -278,7 +271,6 @@ export const listItemLink = style({
   userSelect: "none",
   padding: size["2"],
   borderRadius: 6,
-  fontSize: size["2"], //TODO
   lineHeight: 1,
   ":focus": {
     boxShadow: `0 0 0 2px ${color.primary}`, //TODO

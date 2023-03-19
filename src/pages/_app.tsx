@@ -20,8 +20,8 @@ const { color } = vars;
 const Site = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  /* We dom't want to init our page without pageprops */
-  // if (!pageProps.page) return;
+  /* We don't want to init our page without pageprops */
+  if (!pageProps.page) return;
 
   return (
     <SessionProvider session={pageProps.session}>
